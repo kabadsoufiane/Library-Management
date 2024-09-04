@@ -35,8 +35,9 @@ public class BookController {
 
     @GetMapping("/{bookId}")
     public ResponseEntity<Book> getBookById(@PathVariable Long bookId) {
-        Book book = bookService.getBookById(bookId).orElse(null);
-        return ResponseEntity.ok(book);
+        return bookService.getBookById(bookId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping

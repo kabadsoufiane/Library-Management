@@ -2,7 +2,10 @@ package com.library.libraryManagement.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity(name="users")
@@ -11,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +39,32 @@ public class User {
         this.id = id;
     }
 
-    public enum Role {
-        ADMIN, LIBRARIAN, USER
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getAuthorities();
+    }
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; // Vous pouvez personnaliser selon vos besoins
+    }
 
+    @Override
+    public boolean isAccountNonLocked() {
+        return true; // Vous pouvez personnaliser selon vos besoins
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true; // Vous pouvez personnaliser selon vos besoins
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true; // Vous pouvez personnaliser selon vos besoins
+    }
 }

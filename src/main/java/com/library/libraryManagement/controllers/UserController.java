@@ -1,6 +1,7 @@
 package com.library.libraryManagement.controllers;
 
 
+import com.library.libraryManagement.entities.Role;
 import com.library.libraryManagement.entities.User;
 import com.library.libraryManagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}/role")
-    public ResponseEntity<User> updateUserRole(@PathVariable Long userId, @RequestBody User.Role newRole) {
+    public ResponseEntity<User> updateUserRole(@PathVariable Long userId, @RequestBody Role newRole) {
         User updatedUser = userService.updateUserRole(userId, newRole);
         return ResponseEntity.ok(updatedUser);
     }

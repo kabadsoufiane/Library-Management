@@ -1,5 +1,6 @@
 package com.library.libraryManagement.services;
 
+import com.library.libraryManagement.entities.Role;
 import com.library.libraryManagement.exceptions.UserExceptions;
 import com.library.libraryManagement.repositories.UserRepository;
 import com.library.libraryManagement.entities.User;
@@ -41,7 +42,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUserRole(Long userId, User.Role newRole) throws UserExceptions.UserNotFoundException {
+    public User updateUserRole(Long userId, Role newRole) throws UserExceptions.UserNotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserExceptions.UserNotFoundException("User not found with id: " + userId));
         user.setRole(newRole);

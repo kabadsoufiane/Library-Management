@@ -22,6 +22,7 @@ public class Book {
     @Column(nullable = false)
     private String title;
 
+    private String imageUrl;
     private String author;
     private Integer publicationYear;
     private String summary;

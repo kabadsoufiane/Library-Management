@@ -21,6 +21,9 @@ public class StatsController {
     @GetMapping("/books/popular")
     public ResponseEntity<List<Book>> getMostPopularBooks() {
         List<Book> books = statsService.getMostPopularBooks();
+        if (books.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(books);
     }
 
